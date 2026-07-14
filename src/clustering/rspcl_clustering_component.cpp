@@ -18,7 +18,7 @@
 RspclClusteringComponent::RspclClusteringComponent() : Node("pclsub")
 {
   subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
-    "/camera/pointcloud", 
+    "/camera/camera/depth/color/points", 
     10, 
     std::bind(&RspclClusteringComponent::timer_callback, this, std::placeholders::_1)\
   );

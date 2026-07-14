@@ -1,3 +1,7 @@
+/*
+2025/05/28 nguyen rclcpp::Durationの修正
+*/
+
 #include <iostream>
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
@@ -53,7 +57,7 @@ class PclSub : public rclcpp::Node
     {
       pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud(new pcl::PointCloud<pcl::PointXYZRGB>);
       pcl::fromROSMsg(*cloud_msg, *cloud);
-      RCLCPP_INFO(this->get_logger(), "cloud_size(%d)",cloud->points.size());
+      RCLCPP_INFO(this->get_logger(), "cloud_size(%zu)",cloud->points.size());
       RCLCPP_INFO(this->get_logger(), "points_size(%d,%d)",cloud_msg->height,cloud_msg->width);
 
       // define a new container for the data
@@ -110,7 +114,7 @@ class PclSub : public rclcpp::Node
         marker.color.g = 1.0;
         marker.color.b = 1.0;
         marker.color.a = 1.0;
-        marker.lifetime = rclcpp::Duration(0.0);
+        marker.lifetime = rclcpp::Duration(std::chrono::duration<double>(0.0));
 
         // ARROW_r
         visualization_msgs::msg::Marker arrow_r;
@@ -133,7 +137,7 @@ class PclSub : public rclcpp::Node
         arrow_r.color.g = 0.0;
         arrow_r.color.b = 0.0;
         arrow_r.color.a = 1.0;
-        arrow_r.lifetime = rclcpp::Duration(0.0);
+        arrow_r.lifetime = rclcpp::Duration(std::chrono::duration<double>(0.0));
 
         // ARROW_g
         visualization_msgs::msg::Marker arrow_g;
@@ -156,7 +160,7 @@ class PclSub : public rclcpp::Node
         arrow_g.color.g = 1.0;
         arrow_g.color.b = 0.0;
         arrow_g.color.a = 1.0;
-        arrow_g.lifetime = rclcpp::Duration(0.0);
+        arrow_g.lifetime = rclcpp::Duration(std::chrono::duration<double>(0.0));
 
         // TEXT
         visualization_msgs::msg::Marker text;
@@ -177,7 +181,7 @@ class PclSub : public rclcpp::Node
         text.color.g = 1.0;
         text.color.b = 1.0;
         text.color.a = 1.0;
-        text.lifetime = rclcpp::Duration(0.0);
+        text.lifetime = rclcpp::Duration(std::chrono::duration<double>(0.0));
 
         // LINE STRIP
         visualization_msgs::msg::Marker connection;
@@ -192,7 +196,7 @@ class PclSub : public rclcpp::Node
         connection.color.g = 1.0;
         connection.color.b = 0.0;
         connection.color.a = 1.0;
-        connection.lifetime = rclcpp::Duration(0.0);
+        connection.lifetime = rclcpp::Duration(std::chrono::duration<double>(0.0));
         start_line.x = geometry_points[i].x;
         start_line.y = geometry_points[i].y;
         start_line.z = geometry_points[i].z;

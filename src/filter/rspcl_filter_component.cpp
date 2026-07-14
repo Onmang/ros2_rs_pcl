@@ -19,7 +19,7 @@
 RspclFilterComponent::RspclFilterComponent() : Node("pclsub")
 {
   subscriber_ = this->create_subscription<sensor_msgs::msg::PointCloud2>(
-    "/camera/pointcloud", 
+    "/camera/camera/depth/color/points", 
     10, 
     std::bind(&RspclFilterComponent::timer_callback, this, std::placeholders::_1)\
   );
@@ -58,7 +58,7 @@ void RspclFilterComponent::timer_callback(const sensor_msgs::msg::PointCloud2::S
   // Voxel Grid: pattern 1
   pcl::VoxelGrid<pcl::PointXYZRGB> voxelGrid;
   voxelGrid.setInputCloud(cloud);
-  leaf_size_ = 0.1;
+  leaf_size_ = 0.01f;
   // set the leaf size (x, y, z)
   voxelGrid.setLeafSize(leaf_size_, leaf_size_, leaf_size_);
   // apply the filter to dereferenced cloudVoxel
